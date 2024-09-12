@@ -1,0 +1,92 @@
+.App {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.App-description {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.App-main {
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.App-section {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.App-section:last-child {
+  border-bottom: none;
+}
+
+.App-form-group {
+  margin-bottom: 15px;
+}
+
+.App-select, .App-input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.App-select-multiple {
+  height: 100px;
+}
+
+.App-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.App-button-secondary {
+  background-color: #008CBA;
+}
+
+.App-pre {
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.App-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.App-info {
+  font-style: italic;
+  color: #666;
+}
+
+.App-file-input {
+  margin-top: 10px;
+}
