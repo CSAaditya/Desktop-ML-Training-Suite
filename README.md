@@ -1,5 +1,5 @@
 # MLQuickStart
-A web applicatin to explore various ML algorithms quickly through a simple web interface.
+A web application to explore various ML algorithms quickly through a simple web interface.
 
 ## Project Structure
 ```bash
