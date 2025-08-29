@@ -1,4 +1,4 @@
-# MLQuickStart
+# Desktop ML Training Suite
 A web application to explore various ML algorithms quickly through a simple web interface.
 Designed to help users train and save machine learning models and make predictions
 Todo:
