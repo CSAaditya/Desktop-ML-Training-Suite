@@ -16,6 +16,9 @@ from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.svm import SVC
+from sklearn.linear_model import LogisticRegression
 import joblib
 import os
 from io import StringIO
@@ -128,6 +131,12 @@ async def train_model(params: TrainingParams):
             model = LinearRegression(**params.params)
         elif params.algorithm == 'RandomForestClassifier':
             model = RandomForestClassifier(**params.params)
+        elif params.algorithm == 'GradientBoostingClassifier':
+            model = GradientBoostingClassifier(**params.params)
+        elif params.algorithm == 'SVC':
+            model = SVC(**params.params)
+        elif params.algorithm == 'LogisticRegression':
+            model = LogisticRegression(**params.params)
         else:
             raise HTTPException(status_code=400, detail="Unsupported algorithm")
 
@@ -149,13 +158,14 @@ async def train_model(params: TrainingParams):
             "path": model_path
         }
 
-        if isinstance(model, LinearRegression):
+        
+        if isinstance(model, (LinearRegression, LogisticRegression)):
             mse = mean_squared_error(y_test, y_pred)
             r2 = r2_score(y_test, y_pred)
-            return {"mse": mse, "r2": r2, "model_name": model_name}
+            return {"mse": float(mse), "r2": float(r2), "model_name": model_name}
         else:
             accuracy = accuracy_score(y_test, y_pred)
-            return {"accuracy": accuracy, "model_name": model_name}
+            return {"accuracy": float(accuracy), "model_name": model_name}
 
     except Exception as e:
         print(f"Error in train_model: {str(e)}")
