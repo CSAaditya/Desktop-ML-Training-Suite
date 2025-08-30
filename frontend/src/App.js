@@ -203,6 +203,9 @@ function App() {
                 <select value={algorithm} onChange={(e) => setAlgorithm(e.target.value)} className="App-select">
                   <option value="LinearRegression">Linear Regression</option>
                   <option value="RandomForestClassifier">Random Forest Classifier</option>
+                  <option value="GradientBoostingClassifier">Gradient Boosting Classifier</option>
+                  <option value="SVC">Support Vector Classifier</option>
+                  <option value="LogisticRegression">Logistic Regression</option>
                 </select>
               </label>
             </div>
@@ -211,10 +214,23 @@ function App() {
         )}
 
         {trainingResult && (
-          <section className="App-section">
-            <h2>Training Result</h2>
-            <pre className="App-pre">{JSON.stringify(trainingResult, null, 2)}</pre>
-          </section>
+            <section className="App-section">
+                <h2>Training Result</h2>
+                <div className="App-result">
+                    {trainingResult.accuracy !== undefined ? (
+                        <>
+                            <p><strong>Accuracy:</strong> {(trainingResult.accuracy * 100).toFixed(2)}%</p>
+                            <p><strong>Model Name:</strong> {trainingResult.model_name}</p>
+                        </>
+                    ) : (
+                        <>
+                            <p><strong>MSE:</strong> {trainingResult.mse.toFixed(4)}</p>
+                            <p><strong>R² Score:</strong> {trainingResult.r2.toFixed(4)}</p>
+                            <p><strong>Model Name:</strong> {trainingResult.model_name}</p>
+                        </>
+                    )}
+                </div>
+            </section>
         )}
 
         <section className="App-section">
@@ -253,10 +269,15 @@ function App() {
 
         {predictionResult && (
           <section className="App-section">
-            <h2>Prediction Result</h2>
-            <pre className="App-pre">{JSON.stringify(predictionResult, null, 2)}</pre>
+              <h2>Prediction Result</h2>
+              <div className="App-result">
+                  <p><strong>Predicted Value:</strong> {predictionResult[0]}</p>
+                  {selectedModel.includes('Classifier') && (
+                      <p><em>{predictionResult[0] === 0 ? 'Negative Class' : 'Positive Class'}</em></p>
+                  )}
+              </div>
           </section>
-        )}
+      )}
 
         {featureInfo && (
           <section className="App-section">
