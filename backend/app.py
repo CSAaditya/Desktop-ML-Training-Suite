@@ -1,3 +1,4 @@
+
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
@@ -46,6 +47,7 @@ class TrainingParams(BaseModel):
     target: str
     features: List[str]
     params: dict
+    test_size: float = 0.2  
 
 class PredictionInput(BaseModel):
     features: Dict[str, Any]
@@ -125,7 +127,7 @@ async def train_model(params: TrainingParams):
 
         print(f"X_processed shape: {X_processed.shape}")
 
-        X_train, X_test, y_train, y_test = train_test_split(X_processed, y, test_size=0.2, random_state=42)
+        X_train, X_test, y_train, y_test = train_test_split(X_processed, y, test_size=params.test_size, random_state=42)
 
         if params.algorithm == 'LinearRegression':
             model = LinearRegression(**params.params)
