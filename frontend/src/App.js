@@ -16,6 +16,7 @@ function App() {
   const [savedModels, setSavedModels] = useState([]);
   const [selectedModel, setSelectedModel] = useState('');
   const [requiredFeatures, setRequiredFeatures] = useState([]);
+  const [testSize, setTestSize] = useState(0.2);
 
   useEffect(() => {
     fetchSavedModels();
@@ -102,7 +103,8 @@ function App() {
         algorithm,
         target,
         features,
-        params: {}
+        params: {},
+        test_size: testSize  // Added this line
       });
       setTrainingResult(response.data);
       fetchSavedModels();  // Refresh the list of saved models
@@ -209,6 +211,24 @@ function App() {
                 </select>
               </label>
             </div>
+            <div className="App-form-group">
+              <label>
+                Train/Test Split:
+                <input 
+                  type="range" 
+                  min="0.1" 
+                  max="0.4" 
+                  step="0.05" 
+                  value={testSize}
+                  onChange={(e) => setTestSize(parseFloat(e.target.value))}
+                  className="App-input"
+                  style={{ width: '100%' }}
+                />
+                <span style={{ display: 'inline-block', marginTop: '5px' }}>
+                  {Math.round((1-testSize)*100)}% Train / {Math.round(testSize*100)}% Test
+                </span>
+              </label>
+            </div>
             <button onClick={handleTrainModel} className="App-button">Train Model</button>
           </section>
         )}
@@ -313,3 +333,4 @@ function App() {
 }
 
 export default App;
+  
